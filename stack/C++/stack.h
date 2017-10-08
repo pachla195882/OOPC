@@ -10,7 +10,7 @@ class Stack{
 		~Stack();
 		void push(int value);
 		int pop();
-		bool isEmpty;
+		bool isEmpty();
 };
 
 
