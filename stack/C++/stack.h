@@ -5,6 +5,7 @@ class Stack{
 	private:
 		int top;
 		int * tab;
+		int size;
 	public:
 		Stack();
 		~Stack();
