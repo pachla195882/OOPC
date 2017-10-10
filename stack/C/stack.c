@@ -3,8 +3,9 @@
 #include <stdbool.h>
 #define INTSIZE 1
 
-
-//ERROR HANDLING AND EXTENDING STACK
+//TODO:
+//Change the way stack extends.
+//
 typedef struct{
 	int top;
 	int *tab;
@@ -13,6 +14,9 @@ typedef struct{
 void init(Stack* s) {
 	s->top = 0;
 	s->tab = malloc(INTSIZE*sizeof(int));
+	if(s->tab == NULL) {
+		printf("Allocating memory failed.");
+	}
 }
 void destroy(Stack* s) {
 	free(s->tab);
@@ -27,7 +31,7 @@ void push(Stack* s, int i) {
 int pop(Stack* s) {
 	if(s->top == 0){
 		printf("Stack is empty!\n");
-		return -1;
+		return 0;
 	}else {	
 		int value;
 		value = s->top;
