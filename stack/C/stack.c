@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define INTSIZE 1
 
-//TODO:
-//Change the way stack extends.
-//
 typedef struct{
 	int top;
 	int *tab;
@@ -13,7 +9,7 @@ typedef struct{
 
 void init(Stack* s) {
 	s->top = 0;
-	s->tab = malloc(INTSIZE*sizeof(int));
+	s->tab = malloc(2*sizeof(int));
 	if(s->tab == NULL) {
 		printf("Allocating memory failed.");
 	}
@@ -23,7 +19,7 @@ void destroy(Stack* s) {
 }
 void push(Stack* s, int i) {
 	if(s->top > 0){
-		s->tab = realloc(s->tab, (s->top+1)*sizeof(int));
+		s->tab = realloc(s->tab, (s->top+2)*sizeof(int));
 	}
 	i = s->tab[s->top];
 	s->top++;
@@ -35,7 +31,7 @@ int pop(Stack* s) {
 	}else {	
 		int value;
 		value = s->top;
-		s->tab = realloc(s->tab, (s->top-1)*sizeof(int));
+		s->tab = realloc(s->tab, (s->top-2)*sizeof(int));
 		s->top--;
 		return value;
 	}
