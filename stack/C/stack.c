@@ -9,7 +9,7 @@ typedef struct{
 
 void init(Stack* s) {
 	s->top = 0;
-	s->tab = malloc(2*sizeof(int));
+	s->tab = malloc(sizeof(int));
 	if(s->tab == NULL) {
 		printf("Allocating memory failed.");
 	}
@@ -19,7 +19,7 @@ void destroy(Stack* s) {
 }
 void push(Stack* s, int i) {
 	if(s->top > 0){
-		s->tab = realloc(s->tab, (s->top+2)*sizeof(int));
+		s->tab = realloc(s->tab, (s->top+2) * sizeof(int));
 	}
 	i = s->tab[s->top];
 	s->top++;
@@ -31,7 +31,6 @@ int pop(Stack* s) {
 	}else {	
 		int value;
 		value = s->top;
-		s->tab = realloc(s->tab, (s->top-2)*sizeof(int));
 		s->top--;
 		return value;
 	}
@@ -51,9 +50,13 @@ int main() {
 	init(ptr);
 	push(ptr,1);
 	push(ptr,12);
+	push(ptr,18);
+	push(ptr,15);
 	isEmpty(ptr);
-	//pop(ptr);
-	//pop(ptr);
+	pop(ptr);
+	pop(ptr);
+	pop(ptr);
+	pop(ptr);
 	destroy(ptr);
 	return 0;
 }
