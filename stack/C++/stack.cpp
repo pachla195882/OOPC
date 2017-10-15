@@ -1,26 +1,37 @@
 #include "stack.h"
 #include <stdlib.h>
+#include <iostream>
 
-Stack::Stack(){
-    top=0;
+Stack::Stack() {
+    top = 0;
 	size = 1;
-	tab=(int*)malloc(size*sizeof(int));
+	tab = (int*)malloc(size*sizeof(int));
+	if(tab == NULL) {
+		std::cout << "Allocating memory failed.";
+	}
 }
-Stack::~Stack(){
+Stack::~Stack() {
     free(tab);
 }
-void Stack::push(int value){
-	if(top>0){
-		tab=(int*)realloc(tab,(size+1)*sizeof(int));
+void Stack::push(int value) {
+	if(top > 0){
+		tab = (int*)realloc(tab, (top + 2) * sizeof(int));
 	}
-	value=tab[top];
+	value = tab[top];
 	top++;
 }
-int Stack::pop(){
-	return 0;
+int Stack::pop() {
+	if(top == 0) {
+		std::cout << "Stack is empty!";
+		return 0;
+	}
+	int value;
+	value = tab[top-1];
+    top--;
+	return value;
 
 }
-bool Stack::isEmpty(){
+bool Stack::isEmpty() {
     if (top == 0)
 	return true;
     else return false;
