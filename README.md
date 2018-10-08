@@ -3,6 +3,6 @@ This is repository for subject "Object Oriented Programming in C++" conducted on
 
 All codes are tested using Valgrind to check memory leaks. 
 
-This repo was created for my convenience to edit code anywhere, and by the way you can find some help here.
+This repo was created for my convenience to edit code anywhere, and by the way you can find it helpful.
 
 Use it wisely. 
