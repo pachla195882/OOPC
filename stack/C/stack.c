@@ -1,17 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-typedef struct{
-	int top;
-	int *tab;
-} Stack;
+#include "stack.h"
 
 void init(Stack* s) {
 	s->top = 0;
 	s->tab = malloc(sizeof(int));
 	if(s->tab == NULL) {
 		printf("Allocating memory failed.");
+		abort();
 	}
 }
 void destroy(Stack* s) {
@@ -26,9 +23,9 @@ void push(Stack* s, int i) {
 }
 int pop(Stack* s) {
 	if(s->top == 0){
-		printf("Stack is empty!\n");
-		return 0;
-	}else {	
+		printf("Stack is empty!");
+		abort();
+	}else {
 		int value;
 		value = s->top;
 		s->top--;
@@ -42,21 +39,4 @@ int isEmpty(Stack* s) {
 	else{
 		return false;
 	}
-}
-
-int main() {
-	Stack s1, *ptr;
-	ptr=&s1;
-	init(ptr);
-	push(ptr,1);
-	push(ptr,12);
-	push(ptr,18);
-	push(ptr,15);
-	isEmpty(ptr);
-	pop(ptr);
-	pop(ptr);
-	pop(ptr);
-	pop(ptr);
-	destroy(ptr);
-	return 0;
 }
