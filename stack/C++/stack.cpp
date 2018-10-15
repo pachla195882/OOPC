@@ -20,20 +20,27 @@ void Stack::push(int value) {
 	}
 	value = tab[top];
 	top++;
+	std::cout << "Pushed to the stack" << std::endl;
 }
 int Stack::pop() {
 	if(top == 0) {
-		std::cout << "Stack is empty!";
+		std::cout << "Stack is empty!" << std::endl;
 		abort();
 	}
 	int value;
 	value = tab[top-1];
 	top--;
+	std::cout << "Popped from the stack" << std::endl;
 	return value;
 
 }
 bool Stack::isEmpty() {
-	if (top == 0)
+	if (top == 0){
+		std::cout << "Stack is empty" << std::endl;
 		return true;
-	else return false;
+	}
+	else{
+		std::cout << "Stack is not empty" << std::endl;
+		return false;
+	}
 }

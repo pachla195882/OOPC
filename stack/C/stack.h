@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 typedef struct{
 	int top;
 	int *tab;
@@ -7,4 +9,4 @@ void init(Stack* s);
 void destroy(Stack* s);
 void push(Stack* s, int i);
 int pop(Stack* s);
-int isEmpty(Stack* s);
+bool isEmpty(Stack* s);

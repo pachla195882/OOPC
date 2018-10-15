@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "stack.h"
 
 void init(Stack* s) {
@@ -20,6 +19,7 @@ void push(Stack* s, int i) {
 	}
 	i = s->tab[s->top];
 	s->top++;
+	printf("Pushed to the stack\n");
 }
 int pop(Stack* s) {
 	if(s->top == 0){
@@ -29,14 +29,17 @@ int pop(Stack* s) {
 		int value;
 		value = s->top;
 		s->top--;
+		printf("Popped from the stack\n");
 		return value;
 	}
 }
-int isEmpty(Stack* s) {
+bool isEmpty(Stack* s) {
 	if(s->top == 0){
+		printf("Stack is empty\n");
 		return true;
 	}
 	else{
+		printf("Stack is not empty\n");
 		return false;
 	}
 }
