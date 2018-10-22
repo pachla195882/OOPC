@@ -2,12 +2,12 @@
 #include "list.h"
 using namespace std;
 
-list::list(){
+List::List(){
 	head = NULL;
 	current = NULL;
 }
 
-list::~list(){
+List::~List(){
 	while (head){
 		node *t = head->next;
 		delete head;
@@ -15,35 +15,35 @@ list::~list(){
     };
 }
 
-void list::insert(int a){
+void List::insert(int a){
 	node *t = new node;
 	t->next = head;
 	head = t;
 	head->val = a;
 }
 
-void list::goToHead()
+void List::goToHead()
 {
 	current = head;
 }
 
-int list::getCurrentData(){
+int List::getCurrentData(){
 	return current->val;
 }
 
-void list::advance(){
+void List::advance(){
 	current = current->next;
 }
 
-bool list::moreData(){
+bool List::moreData(){
 	if (current)
 		return true;
 	else
 		return false;
 }
 
-list::list(const list & l){
-	current=NULL;
+List::List(const List & l){
+	current = NULL;
 	node *src, **dst;
 	head = NULL;
 	src = l.head;
@@ -52,14 +52,14 @@ list::list(const list & l){
 		*dst = new node;
 		(*dst)->val = src->val;
 		(*dst)->next = NULL;
-		if(src==l.current)
-		current=*dst;
+		if(src == l.current)
+		current =* dst;
 		src = src->next;
 		dst = &((*dst)->next);
 	}
 }
-
-list & list::operator=(const list & l){
+// DO NOT DELETE UNNECESSARILY NODES at while(head)
+List & List::operator=(const List & l){
 	if (&l == this)
 		return *this;
 	current=NULL;

@@ -15,8 +15,13 @@ Stack::~Stack() {
 	free(tab);
 }
 void Stack::push(int value) {
-	if(top > 0){
+	if(top == size){
+		if(tab == NULL) {
+			std::cout << "Allocating memory failed.";
+			abort();
+		}
 		tab = (int*)realloc(tab, (top + 2) * sizeof(int));
+		size += 2;
 	}
 	value = tab[top];
 	top++;

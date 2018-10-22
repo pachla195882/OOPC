@@ -4,6 +4,7 @@
 
 void init(Stack* s) {
 	s->top = 0;
+	s->size = 1;
 	s->tab = malloc(sizeof(int));
 	if(s->tab == NULL) {
 		printf("Allocating memory failed.");
@@ -14,8 +15,13 @@ void destroy(Stack* s) {
 	free(s->tab);
 }
 void push(Stack* s, int i) {
-	if(s->top > 0){
+	if(s->top == s->size){
+		if(s->tab == NULL) {
+			printf("Allocating memory failed.");
+			abort();
+		}
 		s->tab = realloc(s->tab, (s->top+2) * sizeof(int));
+		s->size += 2;
 	}
 	i = s->tab[s->top];
 	s->top++;

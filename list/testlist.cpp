@@ -2,7 +2,7 @@
 #include "list.h"
 using namespace std;
 
-void PrintList(list toPrint, ostream & Out){
+void PrintList(List toPrint, ostream & Out){
 
 	int nextValue;
 	Out << "Printing list contents: " << endl;
@@ -21,12 +21,12 @@ void PrintList(list toPrint, ostream & Out){
 
 int main(){
 	
-	list l;
+	List l;
 	l.insert(1);
 	l.insert(2);
 	l.insert(3);
 	PrintList(l, cout);
-	list l2;
+	List l2;
 	l2=l;
 	PrintList(l2,cout);
 }

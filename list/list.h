@@ -1,4 +1,4 @@
-class list{
+class List{
 private:
 	struct node{
 	node *next;
@@ -7,10 +7,10 @@ private:
 	node * head;
 	node *current;
 public:
-	list();
-	list(const list& l);
-	list& operator=(const list& l);
-	~list();
+	List();
+	List(const List& l);
+	List& operator=(const List& l);
+	~List();
 	void insert(int a);
 	void goToHead();
 	int getCurrentData();

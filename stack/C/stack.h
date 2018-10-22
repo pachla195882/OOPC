@@ -2,6 +2,7 @@
 
 typedef struct{
 	int top;
+	int size;
 	int *tab;
 } Stack;
 
