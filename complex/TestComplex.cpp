@@ -16,5 +16,7 @@ int main() {
 	c = 10 - a;
 	(c -=b) -=10;
 	cout << c <<endl;
+	5 + c;
+	cout <<  c << endl;
 	return 0;
 }

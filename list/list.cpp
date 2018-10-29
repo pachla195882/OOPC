@@ -107,7 +107,7 @@ List & List::operator =(const List & l){
 		dst = &((*dst)->next);
 	}
 	while (*dst) {
-		node *remaining = (*dst)->next;
+		node *rem = (*dst)->next;
 		delete *dst;
 		*dst = rem;
 	}
