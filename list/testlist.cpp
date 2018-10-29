@@ -29,7 +29,7 @@ int main(){
 	for (int i = 4; i < 10; i++)
 		l2.insert(i);
 	PrintList(l2, cout);
-	cout << "Assigning l2 to l1" << endl;
+	cout << "Assigning l1 to l2" << endl;
 	l2 = l1;
 	PrintList(l2, cout);
 	cout << endl;
@@ -41,7 +41,7 @@ int main(){
 	for (int i = 5; i< 10; i++)
 		l4.insert(i);
 	PrintList(l4, cout);
-	cout << "Assigning l4 to l3" << endl;
+	cout << "Assigning l3 to l4" << endl;
 	l4 = l3;
 	PrintList(l4, cout);
 	cout << endl;
@@ -53,7 +53,7 @@ int main(){
 	for (int i = 1; i < 20; i++)
 		l6.insert(i);
 	PrintList(l6, cout);
-	cout << "Assigning l6 to l5" << endl;
+	cout << "Assigning l5 to l6" << endl;
 	l6 = l5;
 	PrintList(l6, cout);
 	cout << endl;
