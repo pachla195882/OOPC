@@ -59,6 +59,7 @@ List::List(const List & l){
 	}
 }
 // DO NOT DELETE UNNECESSARILY NODES at while(head)
+/*
 List & List::operator=(const List & l){
 	if (&l == this)
 		return *this;
@@ -81,5 +82,35 @@ List & List::operator=(const List & l){
 		src = src->next;
 		dst = &((*dst)->next);
     }
+	return *this;
+}
+* */
+
+List & List::operator =(const List & l){
+	if (&l == this)
+		return *this;
+
+	current = nullptr;
+	node *src, **dst;
+	src = l.head;
+	dst = &head;
+
+	while (src) {
+		if (!(*dst)) {
+			*dst = new node;
+			(*dst)->next = nullptr;
+		}
+		(*dst)->val = src->val;
+		if(src == l.current)
+			current = *dst;
+		src = src->next;
+		dst = &((*dst)->next);
+	}
+	while (*dst) {
+		node *remaining = (*dst)->next;
+		delete *dst;
+		*dst = rem;
+	}
+
 	return *this;
 }
