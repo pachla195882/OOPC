@@ -14,7 +14,7 @@ public:
 	Complex(double Real, double Imag);
 	Complex & operator= (const Complex & s);
 	Complex & operator= (double co);
-	Complex operator+ (const Complex & co) const;
+	Complex operator+ (Complex co) const;
 	Complex operator- () const;
 	Complex operator* (Complex co) const;
 	Complex operator/ (Complex co) const;

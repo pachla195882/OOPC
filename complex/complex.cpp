@@ -28,7 +28,7 @@ Complex& Complex::operator= (double co) {
 	return *this;
 }
 
-Complex Complex::operator+ (const Complex & co) const{
+Complex Complex::operator+ (Complex co) const{
 	Complex c;
 	c.Real = this->Real + co.Real;
 	c.Imag = this->Imag + co.Imag;

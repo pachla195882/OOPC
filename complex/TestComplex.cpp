@@ -16,7 +16,10 @@ int main() {
 	c = 10 - a;
 	(c -=b) -=10;
 	cout << c <<endl;
-	5 + c;
+	c + 10; // works
+	//10 + c; doesnt work
+	5*c; // works
+	// c*5 doesnt work
 	cout <<  c << endl;
 	return 0;
 }

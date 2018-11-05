@@ -69,18 +69,18 @@ List & List::operator=(const List & l){
 		delete head;
 		head = t;
 	};
-	node *src, **dst;
+	node *src, **dst; // default constructor step#1 and #2
 	head = NULL;
-	src = l.head;
+	src = l.head; // source pointer set to the first node of the list
 	dst = &head;
-	while (src){
+	while (src){ // terminates after last node is copied
 		*dst = new node;
-		(*dst)->val = src->val;
+		(*dst)->val = src->val; // copying the value from the source node
 		(*dst)->next = NULL;
 		if(src==l.current)
-			current=*dst;
-		src = src->next;
-		dst = &((*dst)->next);
+			current=*dst; // setting current so that it points to the same node
+		src = src->next; // src pointer incrementation
+		dst = &((*dst)->next); // dst pointer incrementation
     }
 	return *this;
 }
