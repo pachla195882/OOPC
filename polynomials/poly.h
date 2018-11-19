@@ -28,12 +28,12 @@ public:
 
 };
 
-Poly operator+ (Poly & poly1, Poly & poly2){
+inline Poly operator+ (Poly & poly1, Poly & poly2){
     Poly n(poly1);
     n += poly2;
     return n;
 }
-Poly operator* (Poly poly1, Poly poly2){
+inline Poly operator* (Poly poly1, Poly poly2){
     Poly n(poly1);
     n *= poly2;
     return n;

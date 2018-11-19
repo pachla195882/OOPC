@@ -16,8 +16,12 @@ int main() {
 	c = 10 - a;
 	(c -=b) -=10;
 	cout << c <<endl;
-	c + 10;
-	5*c;
-	cout <<  c << endl;
+	
+	c = a;
+	c = 10;
+	//c = 10 + c;
+	
+	10 == c;
+	
 	return 0;
 }

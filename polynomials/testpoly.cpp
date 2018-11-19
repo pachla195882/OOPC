@@ -9,6 +9,7 @@ int main()
   P1[3] = 2; P1[1] = 3.6; P1[0] = 7;	//Specify coefficients of P1 = 2x^3 + 3.6x + 7
   
   Poly P2 = 5;				//Declare object representing polynomial P2 = 5
+  cout << "Poly 2 test: "<< P2 << endl;
   P2[1] = 3; P2[2] = -6; P2[4] = 1;	//Specify additional coefficients of P2 = x^4 + 6x^2 + 3x + 5
   
   cout << "Polynomial P1: " << P1 << endl;	//Print P1 	
@@ -31,8 +32,4 @@ int main()
   cout << "Value of polynomial P4 at point 3.14: " << val1 << endl;	//Print the value of P4 at point 3.14
   
   P3 = P4;
-  
-  Poly P0;
-  P0[0] = 1; P0[1] = 2; P0[2] = 1; P0[3] = 7;
-  cout << "P0: " << P0 << endl; //testowy
 }

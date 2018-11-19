@@ -15,39 +15,27 @@ Complex::Complex(double Real, double Imag) {
 	this->Real = Real;
 	this->Imag = Imag;
 }
-
-Complex& Complex::operator= (const Complex & co) {
-	Real = co.Real;
-	Imag = co.Imag;
-	return *this;
-}
-
-Complex& Complex::operator= (double co) {
-	Real = co;
-	Imag = 0;
-	return *this;
-}
-
+/*
 Complex Complex::operator+ (Complex co) const{
 	Complex c;
 	c.Real = this->Real + co.Real;
 	c.Imag = this->Imag + co.Imag;
 	return c;
 }
-
-Complex Complex::operator- () const{
+*/
+Complex Complex::operator- (){
 	return Complex(-Real, -Imag);
 }
 
 
-Complex Complex::operator* (Complex co) const{
+Complex Complex::operator* (Complex co){
 	Complex c;
 	c.Real = Real * co.Real - Imag * co.Imag;
 	c.Imag = Real * co.Imag + co.Real * Imag;
 	return c; 
 }
 
-Complex Complex::operator/ (Complex co) const{
+Complex Complex::operator/ (Complex co){
 	Complex c;
 	c.Real = (Real*co.Real+Imag*co.Imag)/(co.Imag*co.Imag+co.Real*co.Real);
 	c.Imag = (Imag*co.Real-Real*co.Imag)/(co.Imag*co.Imag+co.Real*co.Real);
@@ -78,11 +66,11 @@ Complex& Complex::operator/= (Complex co){
 	return *this;
 }
 
-bool Complex::operator== (const Complex & co){
+/*bool Complex::operator== (const Complex & co){
 	return this->Real == co.Real && this->Imag == co.Imag;
 }
-
-ostream& operator<< (ostream & s, const Complex & co){
+*/
+ostream& operator<< (ostream & s, Complex co){
 	s << "(" << co.Real << ", i" << co.Imag << ")";
     return s;
 }
