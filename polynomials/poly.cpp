@@ -45,6 +45,50 @@ void Poly::swap(Poly & poly1){
 	i_power = aux_power;
 }
 
+Poly& Poly::operator + (const Poly & poly1){
+	if(poly1.getPower() > i_power){
+		for(int i = 0; i <= i_power; i++){
+			data[i] = data[i] + poly1.getPosition(i);
+		}
+		for(int i = i_power+1;i <= poly1.getPower(); i++){
+			data.push_back(poly1.getPosition(i));
+		}
+		i_power = poly1.getPower();
+	}
+	else{
+		for (int i = 0; i <= poly1.getPower(); i++){
+			data[i] = data[i] + poly1.getPosition(i);
+		}
+	}
+	return *this;
+}
+
+Poly& Poly::operator - (const Poly & poly1){
+	if(poly1.getPower() > i_power){
+		for(int i = 0; i <= i_power; i++){
+			data[i] = data[i] - poly1.getPosition(i);
+		}
+		for(int i = i_power+1;i <= poly1.getPower(); i++){
+			data.push_back(poly1.getPosition(i));
+		}
+		i_power = poly1.getPower();
+	}
+	else{
+		for (int i = 0; i <= poly1.getPower(); i++){
+			data[i] = data[i] - poly1.getPosition(i);
+		}
+	}
+	return *this;
+}
+
+Poly Poly::operator - () const{
+	Poly temp(*this);
+	for (int i=0;i<=i_power;++i){
+		temp.data[i] = -data[i];
+	}
+	return temp;
+}
+
 Poly& Poly::operator = (const Poly & poly1){
 	if(this == &poly1){
 		return *this;
@@ -68,6 +112,24 @@ Poly& Poly::operator += (const Poly & poly1){
 	else{
 		for(int i = 0; i <= poly1.getPower();i++){
 				data[i] += poly1.getPosition(i);
+		}
+	}
+	return *this;		
+}
+
+Poly& Poly::operator -= (const Poly & poly1){
+	if(poly1.getPower() > i_power){
+		for(int i = 0; i <= i_power; i++){
+			data[i] -= poly1.getPosition(i);
+		}
+		for(int i = i_power+1;i <= poly1.getPower(); i++){
+			data.push_back(poly1.getPosition(i));
+		}
+		i_power = poly1.getPower();
+	}
+	else{
+		for(int i = 0; i <= poly1.getPower();i++){
+				data[i] -= poly1.getPosition(i);
 		}
 	}
 	return *this;		
