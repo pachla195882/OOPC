@@ -11,6 +11,7 @@ class Poly{
 private:
 	int i_power;
 	vector<float> data;
+	void swap (Poly & poly1);
 	
 public:
 	Poly();
@@ -19,7 +20,6 @@ public:
 	float & operator[] (int position);
 	int getPower() const;
 	float getPosition(int position) const;
-	void swap (Poly & poly1);
 	Poly & operator + (const Poly & poly1);
 	Poly & operator - (const Poly & poly1);
 	Poly operator - () const;

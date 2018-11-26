@@ -17,6 +17,8 @@ Poly::Poly(const Poly & poly1){
 	i_power = poly1.getPower();
 }
 
+
+//DO NOT STORE ZEROS
 float & Poly:: operator[] (int position){
 	if(position > i_power){
 		for(int i = i_power; i <= position; i++){
