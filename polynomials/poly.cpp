@@ -1,178 +1,111 @@
 #include "poly.h"
+#include <math.h>
+#include <iostream>
 
 Poly::Poly(){
-	i_power = 0;
-	data.push_back(0);
 }
 
-Poly::Poly(int zeroPower){
-	i_power = 0;
-	data.push_back(zeroPower);
+Poly::Poly(double zeroPower){
+	poly[0] = zeroPower;
 }
 
-Poly::Poly(const Poly & poly1){
-	for(int i = 0;i <= poly1.getPower(); i++){
-		data.push_back(poly1.getPosition(i));
+double & Poly:: operator[] (int position){
+	return poly[position];
+}
+
+
+Poly operator + (const Poly & poly1, const Poly & poly2){
+	Poly addition;
+	for(map<int, double >::const_iterator iterator = poly1.poly.begin(); iterator != poly1.poly.end(); iterator++){
+		addition.poly[iterator->first] = iterator->second;
 	}
-	i_power = poly1.getPower();
-}
 
-
-//DO NOT STORE ZEROS
-float & Poly:: operator[] (int position){
-	if(position > i_power){
-		for(int i = i_power; i <= position; i++){
-			data.push_back(0);
-		}
-		i_power = position;
-		return data[position];
+	for(map<int, double >::const_iterator iterator = poly2.poly.begin(); iterator != poly2.poly.end(); iterator++){
+		addition.poly[iterator->first] += iterator->second;
 	}
-	else{
-		return data[position];
+
+	addition.deleteZeroCoeffs();	
+	return addition;
+}
+
+Poly operator - (const Poly & poly1, const Poly & poly2){
+	Poly subtraction;
+	for(map<int, double >::const_iterator iterator = poly1.poly.begin(); iterator != poly1.poly.end(); iterator++){
+		subtraction.poly[iterator->first] = iterator->second;
 	}
-}
 
-int Poly::getPower() const{
-	return i_power;
-}
-
-float Poly::getPosition(int position) const{
-	return data[position];
-}
-
-void Poly::swap(Poly & poly1){
-	data.swap(poly1.data);
-	int aux_power = poly1.i_power;
-	poly1.i_power = i_power;
-	i_power = aux_power;
-}
-
-Poly& Poly::operator + (const Poly & poly1){
-	if(poly1.getPower() > i_power){
-		for(int i = 0; i <= i_power; i++){
-			data[i] = data[i] + poly1.getPosition(i);
-		}
-		for(int i = i_power+1;i <= poly1.getPower(); i++){
-			data.push_back(poly1.getPosition(i));
-		}
-		i_power = poly1.getPower();
+	for(map<int, double >::const_iterator iterator = poly2.poly.begin(); iterator != poly2.poly.end(); iterator++){
+		subtraction.poly[iterator->first] -= iterator->second;
 	}
-	else{
-		for (int i = 0; i <= poly1.getPower(); i++){
-			data[i] = data[i] + poly1.getPosition(i);
+
+	subtraction.deleteZeroCoeffs();	
+	return subtraction;
+}
+
+Poly operator * (const Poly & poly1, const Poly & poly2){
+	Poly multiplication;
+
+	for(map<int, double >::const_iterator iterator = poly1.poly.begin(); iterator != poly1.poly.end(); iterator++){
+		for(map<int, double >::const_iterator iterator2 = poly2.poly.begin(); iterator2 != poly2.poly.end(); iterator2++){
+			multiplication.poly[iterator->first + iterator2->first] += iterator->second * iterator2->second;
 		}
 	}
-	return *this;
-}
-
-Poly& Poly::operator - (const Poly & poly1){
-	if(poly1.getPower() > i_power){
-		for(int i = 0; i <= i_power; i++){
-			data[i] = data[i] - poly1.getPosition(i);
-		}
-		for(int i = i_power+1;i <= poly1.getPower(); i++){
-			data.push_back(poly1.getPosition(i));
-		}
-		i_power = poly1.getPower();
-	}
-	else{
-		for (int i = 0; i <= poly1.getPower(); i++){
-			data[i] = data[i] - poly1.getPosition(i);
-		}
-	}
-	return *this;
+	
+	multiplication.deleteZeroCoeffs();
+	
+	return multiplication;
 }
 
 Poly Poly::operator - () const{
-	Poly temp(*this);
-	for (int i=0;i<=i_power;++i){
-		temp.data[i] = -data[i];
-	}
-	return temp;
-}
-
-Poly& Poly::operator = (const Poly & poly1){
-	if(this == &poly1){
-		return *this;
-	}
-	Poly n(poly1);
-	swap(n);
-	i_power = poly1.getPower();
-	return *this;
-}	
-
-Poly& Poly::operator += (const Poly & poly1){
-	if(poly1.getPower() > i_power){
-		for(int i = 0; i <= i_power; i++){
-			data[i] += poly1.getPosition(i);
-		}
-		for(int i = i_power+1;i <= poly1.getPower(); i++){
-			data.push_back(poly1.getPosition(i));
-		}
-		i_power = poly1.getPower();
-	}
-	else{
-		for(int i = 0; i <= poly1.getPower();i++){
-				data[i] += poly1.getPosition(i);
-		}
-	}
-	return *this;		
-}
-
-Poly& Poly::operator -= (const Poly & poly1){
-	if(poly1.getPower() > i_power){
-		for(int i = 0; i <= i_power; i++){
-			data[i] -= poly1.getPosition(i);
-		}
-		for(int i = i_power+1;i <= poly1.getPower(); i++){
-			data.push_back(poly1.getPosition(i));
-		}
-		i_power = poly1.getPower();
-	}
-	else{
-		for(int i = 0; i <= poly1.getPower();i++){
-				data[i] -= poly1.getPosition(i);
-		}
-	}
-	return *this;		
-}
-
-Poly& Poly::operator *= (const Poly & poly1){
-	int size = i_power + poly1.getPower()+1;
-		vector<float> aux_data(size, 0);
-		for(int i = 0;i < i_power;i++){
-			for(int x = 0;x < poly1.getPower();x++){
-				aux_data[i+x] = data[i]*poly1.getPosition(x);
-			}
-		}
-		data.clear();
-		data = aux_data;
-		i_power = size-1;
-		return *this;	
+	return *this*(-1);
 }
 
 double Poly::operator() (double p) const{
 		double val = 0;
-		for(int i = 0; i <= i_power;i++){
-		val += data[i]*pow(p,i);
-	    }
+		for(map<int, double >::const_iterator iterator = poly.begin(); iterator != poly.end(); iterator++){
+		val += pow(p, iterator->first) * iterator->second;
+		}
 	    return val;
 }
 
 ostream & operator << (ostream & s, const Poly & poly1){
-	for(int i = poly1.getPower();i >= 0;i--){
-		    if(poly1.getPosition(i) > 0 && i == 0){
-				s << "+" << poly1.getPosition(i);
-		    }
-		    else if(poly1.getPosition(i) > 0 && i == 1){
-				s << "+" << poly1.getPosition(i) << "*x" << " ";
-		    }	    
-		    else if(poly1.getPosition(i) > 0 && i != poly1.getPower()){
-				s << "+" << poly1.getPosition(i) << "*x^" << i << " ";
-		    }
-		    else if(poly1.getPosition(i) >0 && i == poly1.getPower()){
-				s << poly1.getPosition(i) << "*x^" << i << " ";
-		    }
+	for(map<int, double >::const_iterator iterator = poly1.poly.begin(); iterator != poly1.poly.end();){
+		if (iterator == poly1.poly.begin() && iterator->second < 0){
+			cout << "- ";
+		}
+		if(iterator->second != 0){
+			if ((iterator->second == 1 || iterator->second == -1) && iterator->first == 0){
+				s << abs(iterator->second);
+			}
+			if (iterator->second != 1 && iterator->second != -1){
+				s << abs(iterator->second);
+			}
+			if (iterator->first == 1){
+				s << "x";
+			}
+			else if (iterator->first > 1){
+				s << "x^" << iterator->first;
+			}
+		}
+		if (++iterator != poly1.poly.end()){				// it iterates to the next map pair
+			if (iterator->second > 0){
+				s << " + ";
+			}
+			else if (iterator->second < 0){
+				s << " - ";
+			}
+		}
 	}
 	return s;
+}
+
+void Poly::deleteZeroCoeffs() {
+	for(map<int, double >::iterator iterator = poly.begin(); iterator != poly.end();){
+		if(iterator->second == 0){
+			iterator = poly.erase(iterator);
+		}
+		else {
+			iterator++;
+		}
+	}
 }

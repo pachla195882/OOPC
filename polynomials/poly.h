@@ -1,65 +1,27 @@
 #ifndef POLY_H
 #define POLY_H
 #include <iostream>
-#include <vector>
-#include <math.h>
+#include <map>
 
 using namespace std;
 
 class Poly{
 	
 private:
-	int i_power;
-	vector<float> data;
-	void swap (Poly & poly1);
+	map <int, double, greater<int> > poly;
+	void deleteZeroCoeffs();
 	
 public:
 	Poly();
-	Poly(int zero_power);
-	Poly(const Poly & poly1);
-	float & operator[] (int position);
-	int getPower() const;
-	float getPosition(int position) const;
-	Poly & operator + (const Poly & poly1);
-	Poly & operator - (const Poly & poly1);
-	Poly operator - () const;
-	Poly & operator = (const Poly & poly1);
-	Poly & operator +=(const Poly & poly1);
-	Poly & operator -=(const Poly & poly1);
-	Poly & operator *=(const Poly & poly1);
+	Poly(double zero_power);
+	double & operator[] (int position);
+	friend Poly operator+ (const Poly& poly1, const Poly& poly2);
+	friend Poly operator- (const Poly& poly1, const Poly& poly2);
+	friend Poly operator* (const Poly& poly1, const Poly& poly2);
+	Poly operator- () const;
 	double operator() (double p) const;
 	friend ostream & operator << (ostream& s, const Poly & poly1);
 
 };
-
-
-inline Poly operator+ (Poly & poly1, Poly & poly2){
-    Poly n(poly1);
-    n += poly2;
-    return n;
-}
-
-inline Poly operator + (int i, Poly& poly1){
-	Poly n(poly1);
-	n += i;
-	return n;
-}
-inline Poly operator - (int i, Poly& poly1){
-	Poly n(poly1);
-	n -= i;
-	return n;
-}
-inline Poly operator * (int i, Poly& poly1){
-	Poly n(poly1);
-	n *= i;
-	return n;
-}
-
-
-inline Poly operator* (Poly& poly1, Poly& poly2){
-    Poly n(poly1);
-    n *= poly2;
-    return n;
-}
 
 #endif /*POLY_H*/

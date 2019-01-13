@@ -17,10 +17,10 @@ int main() {
 	p2[1] = 3;
 
 	cout << "Polynomial p2: " << p2 << endl;							// Print p2
-	
+
 	Poly p3 = p1 + p2;													// Add p1 and p2 	
 	cout << "Sum of polynomials p1 and p2: " << p3 << endl;
-
+	
 	p3 = p1 + 3;														// Add p1 and 3
 	cout << "Sum of polynomial p1 and 3: " << p3 << endl;
 
@@ -44,7 +44,8 @@ int main() {
 
 	p3 = -p2;															// Calculate negation of p2
 	cout << "Negation of polynomial p2: " << p3 << endl;
-
+	
 	double val = p1(1.5);												// Calculate value of p1 at point 1.5
 	cout << "Value of polynomial p1 at point 1.5: " << val << endl;
+
 }
