@@ -87,7 +87,7 @@ ostream & operator << (ostream & s, const Poly & poly1){
 				s << "x^" << iterator->first;
 			}
 		}
-		if (++iterator != poly1.poly.end()){				// it iterates to the next map pair
+		if (++iterator != poly1.poly.end()){
 			if (iterator->second > 0){
 				s << " + ";
 			}
@@ -99,7 +99,7 @@ ostream & operator << (ostream & s, const Poly & poly1){
 	return s;
 }
 
-void Poly::deleteZeroCoeffs() {
+void Poly::deleteZeroCoeffs(){
 	for(map<int, double >::iterator iterator = poly.begin(); iterator != poly.end();){
 		if(iterator->second == 0){
 			iterator = poly.erase(iterator);

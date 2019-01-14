@@ -1,4 +1,4 @@
-#include "Map.h"														// Defines template Map<Key, Value>
+#include "map.h"														// Defines template Map<Key, Value>
 #include <iostream>
 
 using namespace std;
@@ -32,16 +32,16 @@ int main() {
 	library.add("Introduction to Electrodynamics", Book("David J. Griffiths", "education", 620, true));
 	library.add("The Little Prince", Book("Antoine de Saint-Exupéry", "fable", 96, false));
 	library.add("The 4-Hour Work Week", Book("Timothy Ferris", "self-help", 308, true));
+	library.add("Steve Jobs", Book("Walter Isaacson", "biography", 569, true));
 
 	cout << library << endl;
 
 	Book* book;
-	if ( (book = library.find("The Little Prince") ) ) {
+	if ((book = library.find("The Little Prince"))){
 		book->lendBook();
 		book->returnBook();
 	}
-
-	if ( (book = library.find("The 4-Hour Work Week") ) ) {
+	if ((book = library.find("The 4-Hour Work Week"))){
 		book->lendBook();
 	}
 

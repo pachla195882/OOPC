@@ -72,8 +72,8 @@ template <class TKey, class TValue> class Map {
             this->values = tempMap.values;
             this->size = tempMap.size;
 
-            tempMap.keys = nullptr;                         // this->keys won't be deleted after exiting the function
-            tempMap.values = nullptr;                       // this->values won't be deleted after exiting the function
+            tempMap.keys = nullptr;                         
+            tempMap.values = nullptr;                 
 
             return *this;
         }
