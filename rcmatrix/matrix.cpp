@@ -235,7 +235,7 @@ istream & operator>>(istream& in, Matrix& matrix){
 		throw NoMatrixExists();
 
 	if(&in == &cin)
-		cout << "Fill in " << matrix.mat->y << "x" << matrix.mat->x << " matrix:" << endl;
+		cout << "Fill values of " << matrix.mat->y << "x" << matrix.mat->x << " matrix:" << endl;
 
 	for(int i = 0; i < matrix.mat->y; i++){
 		for(int j = 0; j < matrix.mat->x; j++){
