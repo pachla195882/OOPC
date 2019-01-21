@@ -6,16 +6,19 @@ using namespace std;
 
 
 Matrix::Matrix(){
+	
 	mat = NULL;
 }
 
 
 Matrix::Matrix(int x,int y){
+	
 	mat = new rcmat(x, y);
 }
 
 
 Matrix::Matrix(const Matrix& matrix){
+	
 	this->mat = matrix.mat;
 	matrix.mat->refCount++;
 	this->detach();
@@ -23,6 +26,7 @@ Matrix::Matrix(const Matrix& matrix){
 
 
 Matrix::~Matrix(){
+	
 	if(mat){
 		mat->refCount--;
 
@@ -37,8 +41,7 @@ Matrix::~Matrix(){
 Matrix::rcmat::rcmat(int x,int y){
 	
 	this->x = x;
-	this->y = y;
-	
+	this->y = y;	
 	refCount = 1;
 
 	data = new double* [y];
@@ -50,6 +53,7 @@ Matrix::rcmat::rcmat(int x,int y){
 
 
 Matrix::rcmat::rcmat(int x, int y, double** data){
+	
 	this->x = x;
 	this->y = y;
 	refCount = 1;
@@ -77,16 +81,19 @@ Matrix::rcmat::~rcmat(){
 
 
 bool Matrix::checkDimensions(const Matrix& matrix){
+	
 	return (mat->x == matrix.mat->x && mat->y == matrix.mat->y);
 }
 
 
 bool Matrix::canMultiply(const Matrix& matrix){
+	
 	return (mat->y == matrix.mat->x);
 }
 
 
 void Matrix::detach(){
+	
 	if(mat)
 		if(mat->refCount > 1){
 			mat->refCount--;
@@ -96,6 +103,7 @@ void Matrix::detach(){
 
 
 bool Matrix::operator==(const Matrix& matrix){
+	
 	return (this->mat) == (matrix.mat);
 }
 
@@ -117,6 +125,7 @@ Matrix& Matrix::operator+=(const Matrix& matrix){
 
 
 Matrix& Matrix::operator-=(const Matrix& matrix){
+	
 	if(this->checkDimensions(matrix)){
 		this->detach();
 		for(int i = 0; i < this->mat->y; i++){
@@ -132,12 +141,14 @@ Matrix& Matrix::operator-=(const Matrix& matrix){
 
 
 Matrix& Matrix::operator*=(const Matrix& matrix){
+	
 	*this = *this * matrix;
 	return *this;
 }
 
 
 Matrix Matrix::operator+(const Matrix& matrix){
+	
 	Matrix newMat(*this);
 	newMat += matrix;
 	return Matrix(newMat);
@@ -145,6 +156,7 @@ Matrix Matrix::operator+(const Matrix& matrix){
 
 
 Matrix Matrix::operator-(const Matrix& matrix){
+	
 	Matrix newMat(*this);
 	newMat -= matrix;
 	return Matrix(newMat);
@@ -152,6 +164,7 @@ Matrix Matrix::operator-(const Matrix& matrix){
 
 
 Matrix Matrix::operator*(const Matrix& matrix){
+	
 	if(this->canMultiply(matrix)){
 		Matrix newMat(this->mat->x, matrix.mat->y);
 
@@ -171,6 +184,7 @@ Matrix Matrix::operator*(const Matrix& matrix){
 
 
 void Matrix::operator=(const Matrix& matrix){
+	
 	if(this->mat){
 		this->mat->refCount--;
 		if(this->mat->refCount == 0)
@@ -182,9 +196,8 @@ void Matrix::operator=(const Matrix& matrix){
 }
 
 
-ostream & operator<<(ostream& out, const Matrix& matrix) {
-
-	out << endl;
+ostream & operator<<(ostream& out, const Matrix& matrix){
+	
 	if(matrix.mat){
 		for(int i = 0; i < matrix.mat->y; i++){
 			for(int j = 0; j < matrix.mat->x; j++){
@@ -204,7 +217,6 @@ ostream & operator<<(ostream& out, const Matrix& matrix) {
 istream & operator>>(istream& in, Matrix& matrix){
 
 	int x, y;
-
 	if (!matrix.mat){
 		if(&in == &cin){
 			cout << "Put dimensions: ";
